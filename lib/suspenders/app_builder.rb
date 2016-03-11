@@ -128,10 +128,6 @@ module Suspenders
       copy_file "hound.yml", ".hound.yml"
     end
 
-    def configure_newrelic
-      template 'newrelic.yml.erb', 'config/newrelic.yml'
-    end
-
     def configure_smtp
       copy_file 'smtp.rb', 'config/smtp.rb'
 
@@ -223,24 +219,16 @@ end
     end
 
     def create_shared_flashes
-      copy_file "_flashes.html.erb", "app/views/application/_flashes.html.erb"
-      copy_file "flashes_helper.rb", "app/helpers/flashes_helper.rb"
+      copy_file "_flash.html.slim", "app/views/layouts/_flash.html.slim"
     end
 
     def create_shared_javascripts
-      copy_file '_javascript.html.erb', 'app/views/application/_javascript.html.erb'
-    end
-
-    def create_shared_css_overrides
-      copy_file(
-        "_css_overrides.html.erb",
-        "app/views/application/_css_overrides.html.erb",
-      )
+      copy_file '_javascript.html.slim', 'app/views/partials/_javascript.html.slim'
     end
 
     def create_application_layout
-      template 'suspenders_layout.html.erb.erb',
-        'app/views/layouts/application.html.erb',
+      template 'suspenders_layout.html.slim.erb',
+        'app/views/layouts/application.html.slim',
         force: true
     end
 
@@ -322,6 +310,20 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
       bundle_command "exec rails generate simple_form:install"
     end
 
+    def configure_devise
+      bundle_command "exec rails generate devise:install"
+    end
+
+    def configure_active_admin
+      bundle_command "exec rails generate active_admin:install"
+      bundle_command "exec rake db:migrate"
+      bundle_command "exec rake db:seed"
+    end
+
+    def configure_initjs
+      bundle_command 'exec rails generate initjs:install'
+    end
+
     def configure_action_mailer
       action_mailer_host "development", %{"localhost:3000"}
       action_mailer_host "test", %{"www.example.com"}
@@ -339,10 +341,6 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
       generate 'rspec:install'
     end
 
-    def configure_puma
-      copy_file "puma.rb", "config/puma.rb"
-    end
-
     def set_up_forego
       copy_file "Procfile", "Procfile"
     end
@@ -351,15 +349,6 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
       remove_file "app/assets/stylesheets/application.css"
       copy_file "application.scss",
                 "app/assets/stylesheets/application.scss"
-    end
-
-    def install_refills
-      generate "refills:import", "flashes"
-      remove_dir "app/views/refills"
-    end
-
-    def install_bitters
-      run "bitters install --path app/assets/stylesheets"
     end
 
     def setup_default_directories

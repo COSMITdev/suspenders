@@ -1,7 +1,8 @@
-# Suspenders [![Build Status](https://secure.travis-ci.org/thoughtbot/suspenders.svg?branch=master)](http://travis-ci.org/thoughtbot/suspenders)
+# Suspenders
+<!-- [![BuildStatus](https://secure.travis-ci.org/cosmitdev/suspenders.svg?branch=master)](http://travis-ci.org/cosmitdev/suspenders) -->
 
 Suspenders is the base Rails application used at
-[thoughtbot](https://thoughtbot.com/).
+[COSMIT](http://cosmit.me/) to create powerful applications with less effort.
 
   ![Suspenders boy](http://media.tumblr.com/1TEAMALpseh5xzf0Jt6bcwSMo1_400.png)
 
@@ -9,13 +10,13 @@ Suspenders is the base Rails application used at
 
 First install the suspenders gem:
 
-    gem install suspenders
+    gem install suspenders http://github.com/cosmitdev/suspenders.git
 
 Then run:
 
-    suspenders projectname
+    suspenders [your_project_name]
 
-This will create a Rails app in `projectname` using the latest version of Rails.
+This will create a Rails app in `[your_project_name]` using the latest version of Rails.
 
 ### Associated services
 
@@ -31,51 +32,41 @@ generated projectname/Gemfile.
 
 It includes application gems like:
 
-* [Autoprefixer Rails](https://github.com/ai/autoprefixer-rails) for CSS vendor prefixes
-* [Bourbon](https://github.com/thoughtbot/bourbon) for Sass mixins
-* [Bitters](https://github.com/thoughtbot/bitters) for scaffold application styles
 * [Delayed Job](https://github.com/collectiveidea/delayed_job) for background
-  processing
-* [Flutie](https://github.com/thoughtbot/flutie) for `page_title` and `body_class` view
-  helpers
-* [High Voltage](https://github.com/thoughtbot/high_voltage) for static pages
-* [Honeybadger](https://honeybadger.io) for exception notification
+  processing (for default this is disabled to avoid expenses on Heroku)
 * [jQuery Rails](https://github.com/rails/jquery-rails) for jQuery
-* [Neat](https://github.com/thoughtbot/neat) for semantic grids
-* [New Relic RPM](https://github.com/newrelic/rpm) for monitoring performance
 * [Normalize](https://necolas.github.io/normalize.css/) for resetting browser styles
 * [Postgres](https://github.com/ged/ruby-pg) for access to the Postgres database
-* [Rack Canonical Host](https://github.com/tylerhunt/rack-canonical-host) to
-  ensure all requests are served from the same domain
 * [Rack Timeout](https://github.com/heroku/rack-timeout) to abort requests that are
   taking too long
 * [Recipient Interceptor](https://github.com/croaky/recipient_interceptor) to
   avoid accidentally sending emails to real people from staging
-* [Refills](https://github.com/thoughtbot/refills) for “copy-paste” components
-  and patterns based on Bourbon, Neat and Bitters
 * [Simple Form](https://github.com/plataformatec/simple_form) for form markup
   and style
-* [Title](https://github.com/calebthompson/title) for storing titles in
-  translations
-* [Puma](https://github.com/puma/puma) to serve HTTP requests
+* [Passenger](https://github.com/phusion/passenger) to serve HTTP requests
+* [Slim Rails](https://github.com/slim-template/slim-rails) For better HTML code on your files
+* [Active Admin](https://github.com/activeadmin/activeadmin) For administrative interfaces
+* [Twitter Boostrap SASS](http://github.com/twbs/bootstrap-sass) For, of course, Twitter Bootstrap Framework
+* [Meta Tags](https://github.com/kpumuk/meta-tags) SEO is important dude!
+* [Coffee Rails](https://github.com/rails/coffee-rails) Adds support for .coffee files
+* [Devise](https://github.com/plataformatec/devise) For awesome user authentications
+* [InitJS](https://github.com/josemarluedke/initjs) Modularize the execution of your JS files
+* [Font Awesome](https://github.com/bokmann/font-awesome-rails) Awesome Fonts!
 
 And development gems like:
 
 * [Dotenv](https://github.com/bkeepers/dotenv) for loading environment variables
 * [Pry Rails](https://github.com/rweng/pry-rails) for interactively exploring
   objects
-* [ByeBug](https://github.com/deivid-rodriguez/byebug) for interactively
-  debugging behavior
 * [Bullet](https://github.com/flyerhzm/bullet) for help to kill N+1 queries and
   unused eager loading
 * [Bundler Audit](https://github.com/rubysec/bundler-audit) for scanning the
   Gemfile for insecure dependencies based on published CVEs
 * [Spring](https://github.com/rails/spring) for fast Rails actions via
   pre-loading
-* [Web Console](https://github.com/rails/web-console) for better debugging via
-  in-browser IRB consoles.
 * [Quiet Assets](https://github.com/evrone/quiet_assets) for muting assets
   pipeline log messages
+* [Thin](https://github.com/thin/thin) to serve HTTP requests
 
 And testing gems like:
 
@@ -109,6 +100,8 @@ Suspenders also comes with:
 * Configuration for [Hound][hound] Continuous Integration (style)
 * The analytics adapter [Segment][segment] (and therefore config for Google
   Analytics, Intercom, Facebook Ads, Twitter Ads, etc.)
+* Pure Google Analytics script if you don't want to spend money with Segment
+* Google Web Fonts script is already included on "application" layout
 
 [setup]: https://robots.thoughtbot.com/bin-setup
 [compress]: https://robots.thoughtbot.com/content-compression-with-rack-deflater
@@ -144,7 +137,7 @@ You can optionally specify alternate Heroku flags:
 
     suspenders app \
       --heroku true \
-      --heroku-flags "--region eu --addons newrelic,sendgrid,ssl"
+      --heroku-flags "--region eu --addons sendgrid,ssl"
 
 See all possible Heroku flags:
 
@@ -200,7 +193,7 @@ PostgreSQL needs to be installed and running for the `db:create` rake task.
 ## Issues
 
 If you have problems, please create a
-[GitHub Issue](https://github.com/thoughtbot/suspenders/issues).
+[GitHub Issue](https://github.com/cosmitdev/suspenders/issues).
 
 ## Contributing
 
@@ -208,7 +201,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 Thank you, [contributors]!
 
-[contributors]: https://github.com/thoughtbot/suspenders/graphs/contributors
+[contributors]: https://github.com/cosmitdev/suspenders/graphs/contributors
 
 ## License
 
@@ -218,7 +211,7 @@ and may be redistributed under the terms specified in the [LICENSE] file.
 
 [LICENSE]: LICENSE
 
-## About thoughtbot
+## Thanks to: Thoughtbot
 
 ![thoughtbot](https://thoughtbot.com/logo.png)
 

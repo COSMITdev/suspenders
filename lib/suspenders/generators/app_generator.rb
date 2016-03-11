@@ -31,6 +31,9 @@ module Suspenders
 
     def suspenders_customization
       invoke :customize_gemfile
+      invoke :setup_simple_form
+      invoke :setup_devise
+      invoke :setup_initjs
       invoke :setup_development_environment
       invoke :setup_test_environment
       invoke :setup_production_environment
@@ -39,8 +42,6 @@ module Suspenders
       invoke :create_suspenders_views
       invoke :configure_app
       invoke :setup_stylesheets
-      invoke :install_bitters
-      invoke :install_refills
       invoke :copy_miscellaneous_files
       invoke :customize_error_pages
       invoke :remove_config_comment_lines
@@ -50,9 +51,9 @@ module Suspenders
       invoke :setup_database
       invoke :create_heroku_apps
       invoke :create_github_repo
-      invoke :setup_segment
       invoke :setup_bundler_audit
       invoke :setup_spring
+      invoke :setup_active_admin
       invoke :outro
     end
 
@@ -64,7 +65,22 @@ module Suspenders
       end
 
       bundle_command 'install'
+    end
+
+    def setup_simple_form
       build :configure_simple_form
+    end
+
+    def setup_devise
+      build :configure_devise
+    end
+
+    def setup_initjs
+      build :configure_initjs
+    end
+
+    def setup_active_admin
+      build :configure_active_admin
     end
 
     def setup_database
@@ -110,7 +126,6 @@ module Suspenders
 
     def setup_production_environment
       say 'Setting up the production environment'
-      build :configure_newrelic
       build :configure_smtp
       build :configure_rack_timeout
       build :enable_rack_canonical_host
@@ -133,7 +148,6 @@ module Suspenders
       build :create_partials_directory
       build :create_shared_flashes
       build :create_shared_javascripts
-      build :create_shared_css_overrides
       build :create_application_layout
     end
 
@@ -144,7 +158,6 @@ module Suspenders
       build :configure_time_formats
       build :disable_xml_params
       build :setup_default_rake_task
-      build :configure_puma
       build :set_up_forego
       build :setup_rack_mini_profiler
     end
@@ -152,16 +165,6 @@ module Suspenders
     def setup_stylesheets
       say 'Set up stylesheets'
       build :setup_stylesheets
-    end
-
-    def install_bitters
-      say 'Install Bitters'
-      build :install_bitters
-    end
-
-    def install_refills
-      say "Install Refills"
-      build :install_refills
     end
 
     def setup_git
@@ -192,11 +195,6 @@ module Suspenders
         say 'Creating Github repo'
         build :create_github_repo, options[:github]
       end
-    end
-
-    def setup_segment
-      say 'Setting up Segment'
-      build :setup_segment
     end
 
     def setup_dotfiles
@@ -241,7 +239,6 @@ module Suspenders
 
     def outro
       say 'Congratulations! You just pulled our suspenders.'
-      say honeybadger_outro
     end
 
     protected
@@ -252,18 +249,6 @@ module Suspenders
 
     def using_active_record?
       !options[:skip_active_record]
-    end
-
-    private
-
-    def honeybadger_outro
-      "Run 'bundle exec honeybadger heroku install' with your API key#{honeybadger_message_suffix}."
-    end
-
-    def honeybadger_message_suffix
-      if options[:heroku]
-        " unless you're using the Heroku Honeybadger add-on"
-      end
     end
   end
 end

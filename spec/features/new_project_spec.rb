@@ -99,21 +99,6 @@ RSpec.describe "Suspend a new project with default configuration" do
       to exist("#{project_path}/config/initializers/rack_mini_profiler.rb")
   end
 
-  it "ensures newrelic.yml reads NewRelic license from env" do
-    newrelic_file = IO.read("#{project_path}/config/newrelic.yml")
-
-    expect(newrelic_file).to match(
-      /license_key: "<%= ENV\["NEW_RELIC_LICENSE_KEY"\] %>"/
-    )
-  end
-
-  it "records pageviews through Segment if ENV variable set" do
-    expect(analytics_partial).
-      to include(%{<% if ENV["SEGMENT_KEY"] %>})
-    expect(analytics_partial).
-      to include(%{window.analytics.load("<%= ENV["SEGMENT_KEY"] %>");})
-  end
-
   it "raises on unpermitted parameters in all environments" do
     result = IO.read("#{project_path}/config/application.rb")
 
@@ -226,9 +211,5 @@ RSpec.describe "Suspend a new project with default configuration" do
 
   def app_name
     SuspendersTestHelpers::APP_NAME
-  end
-
-  def analytics_partial
-    IO.read("#{project_path}/app/views/application/_analytics.html.erb")
   end
 end
