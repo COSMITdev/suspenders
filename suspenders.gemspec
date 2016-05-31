@@ -18,9 +18,9 @@ rush to build something amazing; don't use it if you like missing deadlines.
   s.executables = ['suspenders']
   s.extra_rdoc_files = %w[README.md LICENSE]
   s.files = `git ls-files`.split("\n")
-  s.homepage = 'https://github.com/cosmitdev/suspenders'
+  s.homepage = 'https://github.com/COSMITdev/suspenders'
   s.license = 'MIT'
-  s.name = 'suspenders'
+  s.name = 'cosmit-suspenders'
   s.rdoc_options = ['--charset=UTF-8']
   s.require_paths = ['lib']
   s.summary = "Generate a Rails app using cosmit's best practices."
