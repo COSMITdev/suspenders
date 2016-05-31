@@ -10,7 +10,7 @@ Suspenders is the base Rails application used at
 
 First install the suspenders gem:
 
-    gem install suspenders http://github.com/cosmitdev/suspenders.git
+    gem install cosmit-suspenders
 
 Then run:
 
